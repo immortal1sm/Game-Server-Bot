@@ -39,14 +39,23 @@ Discord → Bot Container → Shell Scripts → Docker Engine → Game Servers
    - **Application (Client) ID** (from General Information)
    - **Guild (Server) ID** (Enable Developer Mode → Right-click server → Copy ID)
 
-5. Invite the bot to your server with these permissions:
-   ```sample
+5. Inside OAuth2 under OAuth2 URL Generator select the following:
+   - **applications.commands** 
+   - **bot**
+     
+   Under Bot Permissions/Text Permissions
+   - **Send Messages**
+   - **Read Message History** 
+   - **Use Slash Commands**
+6. Use the Generated URL to invite your bot to your Discord Channel
+  #### Sample
+   ```
    https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=0&scope=bot%20applications.commands
    ```
-
+   
 ### 3️⃣ Configure Your Game Servers
 
-#### Create Control Scripts Directory
+#### Create Control Scripts Directory inside your Docker host
 ```bash
 sudo mkdir -p /opt/server-control
 ```
@@ -60,20 +69,18 @@ sudo nano /opt/server-control/icarus-up.sh
 set -e
 docker start icarus-dedicated
 ```
+> In this use case, Docker is instructed to start the icarus-dedicated container. Adjust the container name according to your environment.
 
 #### Create Additional Scripts
 Repeat for each action:
 - \`icarus-down.sh\` → \`docker stop icarus-dedicated\`
 - \`icarus-restart.sh\` → \`docker restart icarus-dedicated\`
-- \`sotf-up.sh\` → \`docker start sotf-dedicated\`
-- \`sotf-down.sh\` → \`docker stop sotf-dedicated\`
-- \`sotf-restart.sh\` → \`docker restart sotf-dedicated\`
 
 #### Set Script Permissions
 ```bash
 sudo chmod +x /opt/server-control/*.sh
 ```
-
+> Take note of the script paths, as they will be referenced later in bot.js.
 ### 4️⃣ Project Structure
 
 ```
