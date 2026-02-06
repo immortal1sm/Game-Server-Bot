@@ -1,0 +1,19 @@
+services:
+  discord-bot:
+    image: node:20-alpine
+    container_name: discord-bot
+    working_dir: /usr/src/app
+    command: node bot.js
+
+    environment:
+      DISCORD_TOKEN: "PASTE_YOUR_BOT_TOKEN"
+      CLIENT_ID: "PASTE_YOUR_APPLICATION_ID"
+      GUILD_ID: "PASTE_YOUR_DISCORD_SERVER_ID"
+      CONTROL_CHANNEL: "server-control" #bot text channel
+
+    volumes:
+      - ./bot.js:/usr/src/app/bot.js:ro
+      - /opt/server-control:/opt/server-control:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    restart: unless-stopped
