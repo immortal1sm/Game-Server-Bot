@@ -99,20 +99,24 @@ mkdir -p /discord-server-controller/
 **`docker-compose.yml`** - No \`.env\` file required, all config embedded:
 
 ```yaml
-version: '\''3.8'\''
-
 services:
   discord-bot:
-    build: .
+    image: node:20-alpine
     container_name: discord-bot
+    working_dir: /usr/src/app
+    command: node bot.js
+
     environment:
-      DISCORD_TOKEN: "PASTE_YOUR_BOT_TOKEN_HERE"
-      CLIENT_ID: "PASTE_YOUR_APPLICATION_ID_HERE"
-      GUILD_ID: "PASTE_YOUR_DISCORD_SERVER_ID_HERE"
+      DISCORD_TOKEN: "PASTE_YOUR_BOT_TOKEN"
+      CLIENT_ID: "PASTE_YOUR_APPLICATION_ID"
+      GUILD_ID: "PASTE_YOUR_DISCORD_SERVER_ID"
       CONTROL_CHANNEL: "server-control" #bot text channel
+
     volumes:
+      - ./bot.js:/usr/src/app/bot.js:ro
       - /opt/server-control:/opt/server-control:ro
       - /var/run/docker.sock:/var/run/docker.sock
+
     restart: unless-stopped
 ```
 
