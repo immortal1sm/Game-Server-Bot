@@ -101,7 +101,7 @@ mkdir -p /discord-server-controller/
 ```yaml
 services:
   discord-bot:
-    image: node:20-alpine
+    build: -
     container_name: discord-bot
     working_dir: /usr/src/app
     command: node bot.js
