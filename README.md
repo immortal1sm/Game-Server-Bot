@@ -84,16 +84,17 @@ sudo chmod +x /opt/server-control/*.sh
 ### 4️⃣ Project Structure
 
 ```
-discord-server-controller/
-├── docker-compose.yml    # Main deployment configuration
-├── Dockerfile            # Bot container definition
-├── bot.js                # Bot logic
-└── package.json          # Node.js dependencies
+/opt
+└── discord-server-controller/
+     ├── docker-compose.yml    # Main deployment configuration
+     ├── Dockerfile            # Bot container definition
+     ├── bot.js                # Bot logic
+     └── package.json          # Node.js dependencies
 ```
 
 ### 5️⃣ Docker Compose Configuration
 ```bash
-mkdir -p /discord-server-controller/
+mkdir  /discord-server-controller
 ```
 
 **`docker-compose.yml`** - No \`.env\` file required, all config embedded:
